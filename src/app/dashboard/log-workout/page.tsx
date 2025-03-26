@@ -15,7 +15,7 @@ export default function LogWorkoutPage() {
   const router = useRouter()
 
   const handleSubmit = async () => {
-    const { data, error } = await supabase.from('workouts').insert([
+    const { error } = await supabase.from('workouts').insert([
       {
         logged_at: loggedAt,
         type,
