@@ -1,27 +1,29 @@
 
  Fitness Tracker App — Project Roadmap
-🔧 Setup
- Initialize React project with Vite or CRA
 
- Install and configure Supabase client
+
+🔧 Setup
+ X  Initialize NextJS file with Supabase
+
+ X  Install and configure Supabase client
 
  Set up Tailwind CSS (optional)
 
  Deploy React app to Vercel
 
- Create supabaseClient.js file
+ X Create supabaseClient.ts file
 
 🗃️ Supabase Schema
- Create daily_logs table (date, calories, protein, carbs, fat)
+ X  Create daily_logs table (date, calories, protein, carbs, fat)
 
- Create weight_logs table (date, weight)
+ X  Create weight_logs table (date, weight)
 
- Create workouts table (date, description, type)
+ X  Create workouts table (date, description, type)
 
  Add RLS if needed (optional, later for real auth)
 
 🧪 Frontend Features
- Add hardcoded login
+ X  Add hardcoded login
 
  Create form to enter daily weight
 
