@@ -1,23 +1,32 @@
-'use client'
-
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
 export default function Dashboard() {
-  const router = useRouter()
-
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn')
-    if (isLoggedIn !== 'true') {
-      router.push('/login')
-    }
-  }, [router])
-
   return (
-    <main className="p-6 max-w-2xl mx-auto">
+    <>
       <h1 className="text-2xl font-bold mb-4">🏋️ Dashboard</h1>
-      <p>Welcome to your private fitness tracker.</p>
-      {/* You can add nav links here later */}
-    </main>
+      <p className="mb-6">Welcome to your private fitness tracker.</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a
+          href="/dashboard/log-weight"
+          className="block bg-blue-500 text-white text-center p-4 rounded shadow hover:bg-blue-600"
+        >
+          ➕ Log Weight
+        </a>
+
+        <a
+          href="/dashboard/log-workout"
+          className="block bg-green-500 text-white text-center p-4 rounded shadow hover:bg-green-600"
+        >
+          🏋️ Log Workout
+        </a>
+
+        <a
+          href="/dashboard/view-logs"
+          className="block bg-purple-500 text-white text-center p-4 rounded shadow hover:bg-purple-600"
+        >
+          📊 View Logs
+        </a>
+      </div>
+    </>
   )
 }

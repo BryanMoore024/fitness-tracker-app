@@ -5,35 +5,37 @@ import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 import { format, toZonedTime } from 'date-fns-tz'
 
-
 const easternTimeZone = 'America/New_York'
 const nowEastern = format(toZonedTime(new Date(), easternTimeZone), "yyyy-MM-dd'T'HH:mm")
 
-
-export default function LogWeightPage() {
+export default function LogWorkoutPage() {
   const [loggedAt, setLoggedAt] = useState(nowEastern)
-  const [weight, setWeight] = useState('')
+  const [type, setType] = useState('')
+  const [description, setDescription] = useState('')
   const router = useRouter()
 
   const handleSubmit = async () => {
-    const { error } = await supabase.from('weight_logs').insert([
+    const { data, error } = await supabase.from('workouts').insert([
       {
         logged_at: loggedAt,
-        weight: parseFloat(weight)
+        type,
+        description,
       }
     ])
-
+  
     if (error) {
-      alert('❌ Error saving weight: ' + error.message)
+      console.error('❌ Supabase Error:', error)
+      alert(`❌ Error saving workout: ${error.message || JSON.stringify(error)}`)
     } else {
-      alert('✅ Weight logged!')
+      alert('✅ Workout logged!')
       router.push('/dashboard')
     }
   }
+  
 
   return (
     <main className="p-6 max-w-md mx-auto">
-      <h1 className="text-xl font-bold mb-4">Log Weight</h1>
+      <h1 className="text-xl font-bold mb-4">Log Workout</h1>
 
       <input
         type="datetime-local"
@@ -43,18 +45,26 @@ export default function LogWeightPage() {
       />
 
       <input
-        type="number"
-        placeholder="Weight (lbs)"
-        value={weight}
-        onChange={(e) => setWeight(e.target.value)}
+        type="text"
+        placeholder="Workout Type (e.g. Cardio, Strength)"
+        value={type}
+        onChange={(e) => setType(e.target.value)}
         className="border p-2 w-full mb-3"
+      />
+
+      <textarea
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="border p-2 w-full mb-3"
+        rows={4}
       />
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-600 text-white px-4 py-2 rounded w-full"
+        className="bg-green-600 text-white px-4 py-2 rounded w-full"
       >
-        Log Weight
+        Log Workout
       </button>
     </main>
   )

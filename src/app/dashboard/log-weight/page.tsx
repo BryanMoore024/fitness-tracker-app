@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 import { format, toZonedTime } from 'date-fns-tz'
+import NavBar from '@/components/NavBar'
 
 
 const easternTimeZone = 'America/New_York'
